@@ -1,0 +1,13 @@
+{
+  "name": "stack-postgres",
+  "description": "Patrones de PostgreSQL/Supabase y agente revisor de base de datos.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "postgres",
+    "supabase",
+    "database"
+  ]
+}

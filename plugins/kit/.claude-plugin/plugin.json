@@ -1,0 +1,12 @@
+{
+  "name": "kit",
+  "description": "Instalador del kit: /kit:init configura un proyecto con los plugins de stack y los plugins base, y crea su CLAUDE.md.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "setup",
+    "scaffolding"
+  ]
+}

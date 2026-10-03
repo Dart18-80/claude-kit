@@ -1,0 +1,58 @@
+{
+  "name": "claude-kit",
+  "description": "Entorno de trabajo de Diego para Claude Code: plugins por stack y un instalador por proyecto.",
+  "owner": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "plugins": [
+    {
+      "name": "kit",
+      "source": "./plugins/kit",
+      "description": "Instalador del kit: /kit:init configura un proyecto con los plugins de stack y los plugins base, y crea su CLAUDE.md.",
+      "category": "development"
+    },
+    {
+      "name": "stack-typescript",
+      "source": "./plugins/stack-typescript",
+      "description": "Revisor de código TypeScript/JavaScript (tipos, async, seguridad en Node/web).",
+      "category": "development"
+    },
+    {
+      "name": "stack-nestjs",
+      "source": "./plugins/stack-nestjs",
+      "description": "Patrones de NestJS, arquitectura backend y diseño de APIs REST.",
+      "category": "development"
+    },
+    {
+      "name": "stack-prisma",
+      "source": "./plugins/stack-prisma",
+      "description": "Patrones de Prisma ORM y migraciones de base de datos seguras.",
+      "category": "development"
+    },
+    {
+      "name": "stack-postgres",
+      "source": "./plugins/stack-postgres",
+      "description": "Patrones de PostgreSQL/Supabase y agente revisor de base de datos.",
+      "category": "development"
+    },
+    {
+      "name": "stack-redis",
+      "source": "./plugins/stack-redis",
+      "description": "Patrones de Redis (caché, locks, rate limiting) y colas con BullMQ en NestJS.",
+      "category": "development"
+    },
+    {
+      "name": "stack-nextjs",
+      "source": "./plugins/stack-nextjs",
+      "description": "Patrones de Next.js y React, y testing de componentes.",
+      "category": "development"
+    },
+    {
+      "name": "stack-react-native",
+      "source": "./plugins/stack-react-native",
+      "description": "Patrones de React Native y Expo.",
+      "category": "development"
+    }
+  ]
+}

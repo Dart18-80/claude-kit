@@ -1,0 +1,13 @@
+{
+  "name": "stack-prisma",
+  "description": "Patrones de Prisma ORM y migraciones de base de datos seguras.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "prisma",
+    "orm",
+    "migrations"
+  ]
+}

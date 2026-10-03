@@ -1,0 +1,13 @@
+{
+  "name": "stack-redis",
+  "description": "Patrones de Redis (caché, locks, rate limiting) y colas con BullMQ en NestJS.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "redis",
+    "bullmq",
+    "queues"
+  ]
+}

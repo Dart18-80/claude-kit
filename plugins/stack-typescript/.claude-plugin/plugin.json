@@ -1,0 +1,12 @@
+{
+  "name": "stack-typescript",
+  "description": "Revisor de código TypeScript/JavaScript (tipos, async, seguridad en Node/web).",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "typescript",
+    "code-review"
+  ]
+}

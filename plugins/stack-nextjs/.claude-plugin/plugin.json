@@ -1,0 +1,13 @@
+{
+  "name": "stack-nextjs",
+  "description": "Patrones de Next.js y React, y testing de componentes.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "nextjs",
+    "react",
+    "testing"
+  ]
+}

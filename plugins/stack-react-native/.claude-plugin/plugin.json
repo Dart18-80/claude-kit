@@ -1,0 +1,13 @@
+{
+  "name": "stack-react-native",
+  "description": "Patrones de React Native y Expo.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "mobile"
+  ]
+}

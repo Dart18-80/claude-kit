@@ -1,0 +1,13 @@
+{
+  "name": "stack-nestjs",
+  "description": "Patrones de NestJS, arquitectura backend y diseño de APIs REST.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "nestjs",
+    "backend",
+    "api"
+  ]
+}
