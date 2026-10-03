@@ -1,0 +1,13 @@
+{
+  "name": "stack-rag",
+  "description": "RAG de punta a punta (ingesta, chunking, embeddings, pgvector, búsqueda híbrida, reranking, citas, evals) y agente revisor de RAG.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "ai",
+    "rag",
+    "pgvector"
+  ]
+}

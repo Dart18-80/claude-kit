@@ -1,0 +1,13 @@
+{
+  "name": "stack-ml",
+  "description": "Desarrollar IA: workflow de ML en producción, PyTorch, cómo agregar ML a un sistema existente, y agentes revisor de ML y de errores de PyTorch.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "ai",
+    "ml",
+    "pytorch"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "stack-agents",
+  "description": "Desarrollo de agentes: arquitectura y orquestación, diseño de herramientas, loops seguros, auditoría de agentes y servidores MCP.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "mcp"
+  ]
+}

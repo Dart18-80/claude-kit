@@ -25,6 +25,20 @@ Archivos adaptados (se ajustaron referencias a otras partes de ECC y se agregaro
 | `plugins/stack-nextjs/skills/react-patterns/` | `skills/react-patterns/` |
 | `plugins/stack-nextjs/skills/react-testing/` | `skills/react-testing/` |
 | `plugins/stack-react-native/skills/react-native-patterns/` | `skills/react-native-patterns/` |
+| `plugins/stack-python/skills/python-patterns/`, `python-testing/` | `skills/python-patterns/`, `skills/python-testing/` |
+| `plugins/stack-python/agents/python-reviewer.md` | `agents/python-reviewer.md` |
+| `plugins/stack-fastapi/skills/fastapi-patterns/` | `skills/fastapi-patterns/` |
+| `plugins/stack-fastapi/agents/fastapi-reviewer.md` | `agents/fastapi-reviewer.md` |
+| `plugins/stack-django/skills/django-patterns/`, `django-tdd/`, `django-security/`, `django-verification/` | `skills/django-*` (mismos nombres) |
+| `plugins/stack-django/agents/django-reviewer.md`, `django-build-resolver.md` | `agents/django-reviewer.md`, `agents/django-build-resolver.md` |
+| `plugins/stack-java/skills/java-coding-standards/` | `skills/java-coding-standards/` |
+| `plugins/stack-java/agents/java-reviewer.md`, `java-build-resolver.md` | `agents/java-reviewer.md`, `agents/java-build-resolver.md` |
+| `plugins/stack-springboot/skills/springboot-patterns/`, `springboot-tdd/`, `springboot-security/`, `springboot-verification/`, `jpa-patterns/` | `skills/` (mismos nombres) |
+| `plugins/stack-llm/skills/cost-aware-llm-pipeline/`, `regex-vs-llm-structured-text/` | `skills/` (mismos nombres) |
+| `plugins/stack-agents/skills/agent-harness-construction/`, `loop-design-check/`, `agent-architecture-audit/`, `mcp-server-patterns/` | `skills/` (mismos nombres) |
+| `plugins/stack-rag/agents/rag-pipeline-reviewer.md` | `agents/rag-pipeline-reviewer.md` |
+| `plugins/stack-ml/skills/mle-workflow/`, `pytorch-patterns/`, `ml-adoption-playbook/` | `skills/` (mismos nombres; a `mle-workflow` se le quitaron las secciones que dependían del catálogo de ECC) |
+| `plugins/stack-ml/agents/mle-reviewer.md`, `pytorch-build-resolver.md` | `agents/mle-reviewer.md`, `agents/pytorch-build-resolver.md` |
 
 `postgres-patterns` y `database-reviewer` indican además que se basan en *Supabase Agent Skills* (equipo de Supabase, licencia MIT).
 

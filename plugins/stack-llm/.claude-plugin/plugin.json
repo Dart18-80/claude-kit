@@ -1,0 +1,13 @@
+{
+  "name": "stack-llm",
+  "description": "IA integrada en aplicaciones: patrones de producción para LLMs, evals, control de costos y extracción híbrida regex + LLM.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "evals"
+  ]
+}

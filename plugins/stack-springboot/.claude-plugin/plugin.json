@@ -1,0 +1,13 @@
+{
+  "name": "stack-springboot",
+  "description": "Spring Boot: patrones, TDD, Spring Security, verificación y JPA/Hibernate.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "java",
+    "spring-boot",
+    "jpa"
+  ]
+}

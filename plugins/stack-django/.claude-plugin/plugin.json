@@ -1,0 +1,13 @@
+{
+  "name": "stack-django",
+  "description": "Django + DRF: patrones, TDD, seguridad, verificación y agentes revisor y de errores de build.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "python",
+    "django",
+    "drf"
+  ]
+}

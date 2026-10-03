@@ -1,0 +1,13 @@
+{
+  "name": "stack-fastapi",
+  "description": "Patrones de FastAPI + Pydantic v2 y agente revisor de FastAPI.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "python",
+    "fastapi",
+    "api"
+  ]
+}

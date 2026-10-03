@@ -1,0 +1,12 @@
+{
+  "name": "stack-python",
+  "description": "Python idiomático (PEP 8, type hints), testing con pytest y agente python-reviewer.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "python",
+    "pytest"
+  ]
+}

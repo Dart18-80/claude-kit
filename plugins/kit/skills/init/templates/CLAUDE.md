@@ -6,7 +6,9 @@
 
 {{STACK}}
 
-Gestor de paquetes: **{{GESTOR}}**. No uses otro gestor ni generes lockfiles de otro.
+Gestor de dependencias / build: {{GESTOR}}
+
+No uses otro gestor ni generes lockfiles de otro.
 
 ## Comandos
 
@@ -24,7 +26,7 @@ Sigue este orden en cualquier cambio que no sea trivial:
 2. **Planear:** para cambios de varios pasos, escribe el plan con `writing-plans` y espera mi aprobación.
 3. **TDD:** usa `test-driven-development`. Primero un test que falle, después el código mínimo para pasarlo y luego refactor. Para bugs, empieza con un test que reproduzca el fallo.
 4. **Verificar:** antes de decir que algo está listo, usa `verification-before-completion` y corre de verdad typecheck, lint y tests. Muéstrame la salida.
-5. **Revisar:** para cambios grandes, pide una revisión con los agentes de `pr-review-toolkit` y, si hay código TypeScript, con `typescript-reviewer`.
+5. **Revisar:** para cambios grandes, pide una revisión con los agentes de `pr-review-toolkit` y con el revisor del lenguaje (`typescript-reviewer`, `python-reviewer` o `java-reviewer`, según corresponda).
 6. **Commit:** solo cuando yo lo pida, con `/commit-commands:commit`.
 
 Para errores sin causa clara, usa `systematic-debugging` en lugar de probar cambios al azar.
@@ -33,7 +35,7 @@ Para errores sin causa clara, usa `systematic-debugging` en lugar de probar camb
 
 - Código, nombres, commits y comentarios en **inglés**. La conversación conmigo, en español.
 - Commits con Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`).
-- TypeScript en modo `strict`. Nada de `any` sin un comentario que lo justifique.
+{{CONVENCIONES_LENGUAJE}}
 - Valida en los bordes del sistema (DTOs y entradas externas). Dentro del dominio, confía en los tipos.
 - Secretos solo en variables de entorno validadas al arrancar. Nunca en el código ni en logs.
 

@@ -1,7 +1,7 @@
 ---
 name: init
-description: Configura el proyecto actual con claude-kit — instala a nivel de proyecto los plugins de stack (nestjs, prisma, postgres, redis, nextjs, react-native, typescript) y los plugins base (superpowers, pr-review-toolkit, security-guidance, commit-commands), y crea el CLAUDE.md del proyecto. Úsalo solo cuando el usuario ejecute /kit:init.
-argument-hint: "[stacks...] [--sin-base] [--dry-run]   ej: nestjs prisma postgres redis"
+description: Configura el proyecto actual con claude-kit — instala a nivel de proyecto los plugins de stack (typescript, nestjs, prisma, postgres, redis, nextjs, react-native, python, fastapi, django, java, springboot, llm, agents, rag, ml) y los plugins base (superpowers, pr-review-toolkit, security-guidance, commit-commands), y crea el CLAUDE.md del proyecto. Úsalo solo cuando el usuario ejecute /kit:init.
+argument-hint: "[stacks...] [--sin-base] [--dry-run]   ej: nestjs prisma postgres | fastapi rag | springboot | agents"
 disable-model-invocation: true
 allowed-tools: [Read, Glob, Grep, Write, Edit, Bash]
 ---
@@ -12,23 +12,43 @@ Argumentos del usuario: `$ARGUMENTS`
 
 Objetivo: dejar el proyecto actual listo para trabajar, registrando los plugins **a nivel de proyecto** (`--scope project`). Así quedan anotados en `.claude/settings.json`, que se versiona con el repo, y no afectan a otros proyectos.
 
-Responde al usuario en español. Sé breve: muestra el plan, ejecútalo y muestra el resumen.
+Responde al usuario en español y sé breve: muestra el plan, ejecútalo y muestra el resumen.
 
 ## Constantes
 
 - Marketplace del kit: `claude-kit`, en GitHub `Dart18-80/claude-kit`
 - Marketplace oficial: `claude-plugins-official`, en GitHub `anthropics/claude-plugins-official`
 - Plugins base (oficiales): `superpowers`, `pr-review-toolkit`, `security-guidance`, `commit-commands`
+- Plugins oficiales extra para IA (se agregan solo si aplica, ver Paso 2):
+  - `agent-sdk-dev`: si el proyecto usa el Claude Agent SDK (`@anthropic-ai/claude-agent-sdk` o `claude-agent-sdk`)
+  - `mcp-server-dev`: si el proyecto construye un servidor MCP (`@modelcontextprotocol/sdk`, `mcp` o `fastmcp`) o el usuario lo pide
 
-| Stack (argumento) | Alias aceptados | Plugin |
-|---|---|---|
-| `typescript` | `ts` | `stack-typescript` |
-| `nestjs` | `nest` | `stack-nestjs` |
-| `prisma` | — | `stack-prisma` |
-| `postgres` | `postgresql`, `pg`, `supabase` | `stack-postgres` |
-| `redis` | `bull`, `bullmq` | `stack-redis` |
-| `nextjs` | `next`, `react` | `stack-nextjs` |
-| `react-native` | `rn`, `expo` | `stack-react-native` |
+| Stack (argumento) | Alias aceptados | Plugin | Ecosistema |
+|---|---|---|---|
+| `typescript` | `ts` | `stack-typescript` | JS/TS |
+| `nestjs` | `nest` | `stack-nestjs` | JS/TS |
+| `prisma` | — | `stack-prisma` | JS/TS |
+| `nextjs` | `next`, `react` | `stack-nextjs` | JS/TS |
+| `react-native` | `rn`, `expo` | `stack-react-native` | JS/TS |
+| `python` | `py` | `stack-python` | Python |
+| `fastapi` | — | `stack-fastapi` | Python |
+| `django` | `drf` | `stack-django` | Python |
+| `java` | — | `stack-java` | Java |
+| `springboot` | `spring`, `spring-boot` | `stack-springboot` | Java |
+| `postgres` | `postgresql`, `pg`, `supabase` | `stack-postgres` | cualquiera |
+| `redis` | `bull`, `bullmq` | `stack-redis` | cualquiera |
+| `llm` | `ai`, `ia`, `genai` | `stack-llm` | IA (cualquiera) |
+| `agents` | `agentes`, `agent`, `mcp` | `stack-agents` | IA (cualquiera) |
+| `rag` | `vector`, `embeddings` | `stack-rag` | IA (cualquiera) |
+| `ml` | `pytorch`, `machine-learning`, `deep-learning` | `stack-ml` | IA (Python) |
+
+**Dependencias implícitas.** Agrégalas siempre, aunque el usuario no las pida:
+
+- `nestjs`, `prisma`, `nextjs` o `react-native` → agrega `typescript`
+- `fastapi` o `django` → agrega `python`
+- `springboot` → agrega `java`
+- `agents` o `rag` → agrega `llm`
+- `ml` → agrega `python`
 
 ## Paso 1 — Ubicar el proyecto
 
@@ -40,20 +60,33 @@ Responde al usuario en español. Sé breve: muestra el plan, ejecútalo y muestr
 
 **Si hay argumentos**, conviértelos a plugins con la tabla, sin distinguir mayúsculas. Ignora `--sin-base` y `--dry-run`, que son banderas. Si un argumento no está en la tabla, avisa y muestra la lista válida.
 
-**Si no hay stacks en los argumentos**, detéctalos:
+**Si no hay stacks en los argumentos**, detéctalos. Busca los archivos de manifiesto en la raíz, en `apps/*`, en `packages/*` y en las carpetas de primer nivel (por ejemplo `backend/`, `api/`, `frontend/`, `server/`). Así se cubren los monorepos y los proyectos full-stack con varios lenguajes.
 
-- Lee el `package.json` de la raíz y, si es un monorepo (`pnpm-workspace.yaml`, o `workspaces` en `package.json`), también los `package.json` de `apps/*` y `packages/*`.
-- Reglas de detección:
+- **JS/TS** (`package.json`):
   - `@nestjs/core` → `nestjs`
   - `prisma` o `@prisma/client`, o un archivo `schema.prisma` → `prisma`
-  - `pg`, `postgres`, `@supabase/supabase-js`, o `provider = "postgresql"` en `schema.prisma` → `postgres`
-  - `ioredis`, `redis`, `bullmq`, `bull`, `@nestjs/bullmq` o `@nestjs/bull` → `redis`
   - `next` → `nextjs`
   - `react-native` o `expo` → `react-native`
   - `typescript` en dependencias, o un `tsconfig.json` → `typescript`
-- Muestra lo detectado y **pregunta antes de instalar**. Si no hay `package.json`, pregunta qué stack usará el proyecto.
+- **Python** (`pyproject.toml`, `requirements*.txt`, `setup.py`, `Pipfile`):
+  - cualquiera de esos archivos → `python`
+  - dependencia `fastapi` → `fastapi`
+  - dependencia `django` o `djangorestframework`, o un archivo `manage.py` → `django`
+- **Java** (`pom.xml`, `build.gradle`, `build.gradle.kts`):
+  - cualquiera de esos archivos → `java`
+  - `spring-boot` en el archivo de build (parent `spring-boot-starter-parent`, plugin `org.springframework.boot` o dependencias `spring-boot-starter-*`) → `springboot`
+- **Bases de datos y colas** (en cualquiera de los manifiestos anteriores):
+  - `pg`, `postgres`, `@supabase/supabase-js`, `psycopg`, `psycopg2`, `asyncpg`, `org.postgresql:postgresql`, o `provider = "postgresql"` en `schema.prisma` → `postgres`
+  - `ioredis`, `redis`, `bullmq`, `bull`, `@nestjs/bullmq`, `@nestjs/bull`, `redis-py`, `spring-boot-starter-data-redis` → `redis`
+- **IA** (en cualquiera de los manifiestos anteriores):
+  - SDKs de modelos: `openai`, `@anthropic-ai/sdk`, `anthropic`, `@google/genai`, `google-genai`, `ai` (Vercel AI SDK), `@ai-sdk/*`, `litellm`, `ollama`, `langchain*`, `@langchain/*`, `spring-ai-*` → `llm`
+  - Agentes: `@anthropic-ai/claude-agent-sdk`, `claude-agent-sdk`, `@openai/agents`, `openai-agents`, `langgraph`, `@langchain/langgraph`, `pydantic-ai`, `crewai`, `autogen*`, `@modelcontextprotocol/sdk`, `mcp`, `fastmcp` → `agents`
+  - RAG: `pgvector`, `llama-index*`, `llamaindex`, `chromadb`, `qdrant-client`, `@qdrant/*`, `@pinecone-database/pinecone`, `pinecone`, `weaviate*`, `faiss-cpu`, `faiss-gpu`, `sentence-transformers`, o `CREATE EXTENSION vector` en migraciones → `rag`
+  - ML: `torch`, `tensorflow`, `keras`, `jax`, `scikit-learn`, `xgboost`, `lightgbm`, `transformers`, `mlflow` → `ml`
 
-**Siempre:** si se eligió `nestjs`, `nextjs`, `react-native` o `prisma`, agrega también `typescript`.
+Muestra lo detectado, indicando en qué archivo encontraste cada cosa, y **pregunta antes de instalar**. Si no encuentras ningún manifiesto, pregunta qué stack usará el proyecto.
+
+Al final aplica las dependencias implícitas y decide si corresponden los plugins oficiales extra para IA.
 
 ## Paso 3 — Mostrar el plan
 
@@ -62,6 +95,7 @@ Antes de ejecutar nada, muestra:
 - la raíz del proyecto,
 - los plugins de stack que se instalarán,
 - los plugins base que se instalarán (salvo que venga `--sin-base`),
+- los plugins oficiales extra para IA, si aplican,
 - si se creará o se actualizará `CLAUDE.md`.
 
 Si viene `--dry-run`, termina aquí.
@@ -82,6 +116,10 @@ claude plugin install superpowers@claude-plugins-official --scope project
 claude plugin install pr-review-toolkit@claude-plugins-official --scope project
 claude plugin install security-guidance@claude-plugins-official --scope project
 claude plugin install commit-commands@claude-plugins-official --scope project
+
+# 4. Extras de IA (solo si aplican)
+claude plugin install agent-sdk-dev@claude-plugins-official --scope project
+claude plugin install mcp-server-dev@claude-plugins-official --scope project
 ```
 
 Manejo de errores:
@@ -96,14 +134,27 @@ Manejo de errores:
 
 Busca `CLAUDE.md` en la raíz del proyecto.
 
-**Si no existe**, créalo desde la plantilla `templates/CLAUDE.md`, ubicada en el directorio base de esta skill. Rellena los marcadores `{{...}}` con datos reales del proyecto:
+**Si no existe**, créalo desde la plantilla `templates/CLAUDE.md`, ubicada en el directorio base de esta skill. Rellena los marcadores `{{...}}` con datos reales del proyecto. Si el proyecto tiene varios ecosistemas (por ejemplo, un backend en Python y un frontend en Next.js), arma cada sección por partes, con un subtítulo por carpeta.
 
-- `{{NOMBRE}}`: el `name` del `package.json`, o el nombre de la carpeta.
-- `{{DESCRIPCION}}`: el `description` del `package.json`. Si no hay, pregunta al usuario en una línea. Si el usuario no responde, deja `TODO: describir el proyecto`.
-- `{{STACK}}`: lista con viñetas de los stacks elegidos y sus versiones principales tomadas del `package.json`.
-- `{{GESTOR}}`: el gestor de paquetes según el lockfile: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `bun.lockb` o `bun.lock` → bun, `package-lock.json` → npm. Por defecto, pnpm.
-- `{{COMANDOS}}`: los scripts reales del `package.json`, en especial `dev`, `build`, `test`, `lint`, `typecheck` y `format`, con el formato `<gestor> <script>`. Si un script no existe, no lo inventes. Anótalo como `TODO` solo si es `test` o `lint`.
-- `{{ESTRUCTURA}}`: las carpetas principales (`apps/`, `packages/`, `src/`, `prisma/`…) con una línea cada una. Si el proyecto está vacío, escribe `Proyecto nuevo — completar cuando exista la estructura.`
+- `{{NOMBRE}}`: el nombre del proyecto según el manifiesto (`name` de `package.json`, `[project].name` de `pyproject.toml`, `artifactId` de `pom.xml`, `rootProject.name` de `settings.gradle`). Si no hay manifiesto, usa el nombre de la carpeta.
+- `{{DESCRIPCION}}`: la descripción del manifiesto. Si no hay, pregunta al usuario en una línea. Si el usuario no responde, deja `TODO: describir el proyecto`.
+- `{{STACK}}`: lista con viñetas de los stacks elegidos, con sus versiones principales tomadas de los manifiestos (también la versión de Python o de Java, si está declarada).
+- `{{GESTOR}}`: el gestor de dependencias o de build, una línea por ecosistema:
+  - **JS/TS:** según el lockfile: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `bun.lockb` o `bun.lock` → bun, `package-lock.json` → npm. Por defecto, pnpm.
+  - **Python:** `uv.lock` → uv, `poetry.lock` → Poetry, `Pipfile.lock` → Pipenv. Si no hay ninguno, pip con un entorno virtual (`.venv`).
+  - **Java:** si existe `mvnw` → Maven wrapper (`./mvnw`); si existe `gradlew` → Gradle wrapper (`./gradlew`). Si no hay wrapper, `mvn` o `gradle` según el archivo de build.
+- `{{COMANDOS}}`: solo comandos que existan de verdad en el proyecto, uno por línea, con una breve explicación:
+  - **JS/TS:** los scripts del `package.json` (`dev`, `build`, `test`, `lint`, `typecheck`, `format`) con el formato `<gestor> <script>`.
+  - **Python:** antepone `uv run` o `poetry run` según el gestor. Incluye `pytest` si `pytest` está en las dependencias o configurado en `pyproject.toml`; `ruff check .` y `ruff format .` si `ruff` está configurado; `mypy .` si `mypy` está configurado. Para Django agrega `python manage.py runserver`, `python manage.py makemigrations` y `python manage.py migrate`. Para FastAPI agrega `uvicorn <modulo>:app --reload` solo si encontraste dónde se crea `app = FastAPI(`. Si no, deja `TODO`.
+  - **Java:** con el wrapper detectado. Para Maven: `./mvnw test`, `./mvnw verify` y, si es Spring Boot, `./mvnw spring-boot:run`. Para Gradle: `./gradlew test`, `./gradlew build` y, si es Spring Boot, `./gradlew bootRun`. Agrega la nota: "En PowerShell: `.\mvnw.cmd` / `.\gradlew.bat`".
+  - No inventes comandos. Si falta un comando de tests o de lint, anótalo como `TODO`.
+- `{{ESTRUCTURA}}`: las carpetas principales (`apps/`, `src/`, `prisma/`, `app/`, `tests/`, `src/main/java/...`, etc.), con una línea cada una. Si el proyecto está vacío, escribe `Proyecto nuevo — completar cuando exista la estructura.`
+- `{{CONVENCIONES_LENGUAJE}}`: incluye solo los bloques de los ecosistemas presentes:
+  - **TypeScript:** `- TypeScript en modo strict. Nada de any sin un comentario que lo justifique.`
+  - **Python:** `- Type hints en toda función pública. Formato y lint con ruff. Nada de except desnudos (except:) ni except Exception sin volver a lanzar o registrar el error.`
+  - **Java:** `- Java 17+. Inyección por constructor (nunca @Autowired en campos). Records para DTOs. Optional solo como tipo de retorno, nunca en campos ni parámetros.`
+  - **IA** (si hay `llm`, `agents` o `rag`): `- Toda llamada a un modelo pasa por un único módulo gateway de IA. Prompts versionados en archivos. Salidas estructuradas validadas con schema. Ningún cambio de prompt, modelo o retrieval sin correr los evals.`
+  - **ML** (si hay `ml`): `- Experimentos reproducibles: semillas fijas, datasets y versiones de modelo registradas, sin datos de test usados para entrenar ni para elegir hiperparámetros.`
 
 **Si ya existe**, no lo sobrescribas. Compáralo con la plantilla y propón solo las secciones que falten, en especial "Flujo de trabajo" y "Stack". Aplícalas únicamente si el usuario acepta.
 

@@ -53,6 +53,60 @@
       "source": "./plugins/stack-react-native",
       "description": "Patrones de React Native y Expo.",
       "category": "development"
+    },
+    {
+      "name": "stack-python",
+      "source": "./plugins/stack-python",
+      "description": "Python idiomático (PEP 8, type hints), testing con pytest y agente python-reviewer.",
+      "category": "development"
+    },
+    {
+      "name": "stack-fastapi",
+      "source": "./plugins/stack-fastapi",
+      "description": "Patrones de FastAPI + Pydantic v2 y agente revisor de FastAPI.",
+      "category": "development"
+    },
+    {
+      "name": "stack-django",
+      "source": "./plugins/stack-django",
+      "description": "Django + DRF: patrones, TDD, seguridad, verificación y agentes revisor y de errores de build.",
+      "category": "development"
+    },
+    {
+      "name": "stack-java",
+      "source": "./plugins/stack-java",
+      "description": "Estándares de Java 17+, agente java-reviewer y agente para errores de Maven/Gradle.",
+      "category": "development"
+    },
+    {
+      "name": "stack-springboot",
+      "source": "./plugins/stack-springboot",
+      "description": "Spring Boot: patrones, TDD, Spring Security, verificación y JPA/Hibernate.",
+      "category": "development"
+    },
+    {
+      "name": "stack-llm",
+      "source": "./plugins/stack-llm",
+      "description": "IA integrada en aplicaciones: patrones de producción para LLMs, evals, control de costos y extracción híbrida regex + LLM.",
+      "category": "development"
+    },
+    {
+      "name": "stack-agents",
+      "source": "./plugins/stack-agents",
+      "description": "Desarrollo de agentes: arquitectura y orquestación, diseño de herramientas, loops seguros, auditoría de agentes y servidores MCP.",
+      "category": "development"
+    },
+    {
+      "name": "stack-rag",
+      "source": "./plugins/stack-rag",
+      "description": "RAG de punta a punta (ingesta, chunking, embeddings, pgvector, búsqueda híbrida, reranking, citas, evals) y agente revisor de RAG.",
+      "category": "development"
+    },
+    {
+      "name": "stack-ml",
+      "source": "./plugins/stack-ml",
+      "description": "Desarrollar IA: workflow de ML en producción, PyTorch, cómo agregar ML a un sistema existente, y agentes revisor de ML y de errores de PyTorch.",
+      "category": "development"
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "stack-java",
+  "description": "Estándares de Java 17+, agente java-reviewer y agente para errores de Maven/Gradle.",
+  "author": {
+    "name": "Diego (Dart18-80)",
+    "url": "https://github.com/Dart18-80"
+  },
+  "keywords": [
+    "java",
+    "maven",
+    "gradle"
+  ]
+}
